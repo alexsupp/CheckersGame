@@ -114,10 +114,10 @@ int Grid::move(int from[2], int to[2])
 			{
 				if(abs(Y-y)==2)
 				{
-					if(getPosition(x+((X-x)/2),y+((Y-y))).color==BLACK)
+					if(getPosition(x+((X-x)/2),y+((Y-y)/2)).color==BLACK)
 					{
 						pieceTaken(x,y);
-						pieceTaken(x+((X-x)/2),y+((Y-y)));			
+						pieceTaken(x+((X-x)/2),y+((Y-y)/2));			
 						pieceAdded(tempSquare.color, tempSquare.type, X, Y);
 						if(Y==7)
 							makeKing(X,Y);	
@@ -133,14 +133,15 @@ int Grid::move(int from[2], int to[2])
 					return 0;
 				} 
 			}
+
 			else if(tempSquare.color==BLACK&&((Y-y)<0||tempSquare.type==king))
 			{
 				if(abs(Y-y)==2)
 				{
-					if(getPosition(x+((X-x)/2),y+((Y-y))).color==RED)
+					if(getPosition(x+((X-x)/2),y+((Y-y)/2)).color==RED)
 					{
 						pieceTaken(x,y);
-						pieceTaken(x+((X-x)/2),y+((Y-y)));			
+						pieceTaken(x+((X-x)/2),y+((Y-y)/2));			
 						pieceAdded(tempSquare.color, tempSquare.type, X, Y);
 						if(Y==0)
 							makeKing(X,Y);	
