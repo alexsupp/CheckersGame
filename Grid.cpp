@@ -95,24 +95,19 @@ Square Grid::getPosition(int x, int y)
 	return spot;
 }
 
-void Grid::move(char from[2], char to[2])
+void Grid::move(int from[2], int to[2])
 {
-/*
 	int x,y,X,Y;
 	int moves;
 	Square tempSquare;
-	x = from[0]-65;
-	if(x>9)
-		x-=32;
-	y=from[1]-49;
+	x=from[0];
+	y=from[1];
+	X=to[0];
+	Y=to[1];
 
-	X = to[0]-65;
-	if(X>9)
-		X-=32;
-	Y=to[1]-49;	
 	tempSquare = getPosition(x,y);
 	
-	if(tempSquareabs(X-x)==abs(Y-y))
+	if(abs(X-x)==abs(Y-y))
 		if(getPosition(X,Y).color==NONE&&getPosition(X,Y).type==none)
 			if(tempSquare.type!=king)
 			{
@@ -123,7 +118,7 @@ void Grid::move(char from[2], char to[2])
 				{
 				}
 			}
-				*/
+				
 }
 
 void Grid::makeKing(int x, int y)
