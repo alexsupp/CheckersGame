@@ -72,7 +72,7 @@ int main()
 			switch(turn)
 			{
 				case blackTurn:
-					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != BLACK))
+					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != BLACK)
 						|| (gridBoard.move(fromPos, toPos) == -1))
 					{
 						invalid = true;
@@ -82,7 +82,7 @@ int main()
 					break;
 
 				case redTurn:
-					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != RED))
+					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != RED)
 						|| (gridBoard.move(fromPos, toPos) == -1))
 					{
 						invalid = true;
