@@ -54,7 +54,11 @@ int main()
 		std::cout << gridBoard << endl;
 		if(invalid)
 			std::cout << "Invalid move, please try again" <<endl;
-		std::cout << "Enter move: ";
+		std::cout << "Enter move ";
+		if(turn==blackTurn)
+			cout<<"Black: ";
+		else
+			cout<<"Red: ";
 		std::cin >> from >> to;
 
 		fromPos[0] = convertLetter(from[0]);
