@@ -25,9 +25,10 @@ public:
 	Grid(Grid& grid);
 
 	Square getPosition(int x, int y);
-	void move(int from[2], int to[2]);
+	int move(int from[2], int to[2]);
 	void makeKing(int x, int y);
 	void pieceTaken(int x, int y);
+	void pieceAdded(PieceColor col, PieceType typ, int x, int y);
 	
         Grid& operator=(const Grid& orig); 
 private:

@@ -95,7 +95,7 @@ Square Grid::getPosition(int x, int y)
 	return spot;
 }
 
-void Grid::move(int from[2], int to[2])
+int Grid::move(int from[2], int to[2])
 {
 	int x,y,X,Y;
 	int moves;
@@ -109,16 +109,59 @@ void Grid::move(int from[2], int to[2])
 	
 	if(abs(X-x)==abs(Y-y))
 		if(getPosition(X,Y).color==NONE&&getPosition(X,Y).type==none)
-			if(tempSquare.type!=king)
+		{
+			if(tempSquare.color==RED&&((Y-y)>0||tempSquare.type==king))
 			{
-				if(tempSquare.color==RED)
+				if(abs(Y-y)==2)
 				{
-				}
-				else if(tempSquare.color==RED)
+					if(getPosition(x+((X-x)/2),y+((Y-y))).color==BLACK)
+					{
+						pieceTaken(x,y);
+						pieceTaken(x+((X-x)/2),y+((Y-y)));			
+						pieceAdded(tempSquare.color, tempSquare.type, X, Y);
+						if(Y==7)
+							makeKing(X,Y);	
+						return 0;
+					}
+				}	
+				else if(abs(Y-y)==1)
 				{
-				}
+					pieceTaken(x,y);
+					pieceAdded(tempSquare.color, tempSquare.type, X, Y);
+					if(Y==7)
+						makeKing(X,Y);
+					return 0;
+				} 
 			}
-				
+			else if(tempSquare.color==BLACK&&((Y-y)<0||tempSquare.type==king))
+			{
+				if(abs(Y-y)==2)
+				{
+					if(getPosition(x+((X-x)/2),y+((Y-y))).color==RED)
+					{
+						pieceTaken(x,y);
+						pieceTaken(x+((X-x)/2),y+((Y-y)));			
+						pieceAdded(tempSquare.color, tempSquare.type, X, Y);
+						if(Y==0)
+							makeKing(X,Y);	
+
+						return 0;
+					}
+				}	
+				else if(abs(Y-y)==1)
+				{
+					pieceTaken(x,y);
+					pieceAdded(tempSquare.color, tempSquare.type, X, Y);
+					if(Y==0)
+							makeKing(X,Y);	
+
+					return 0;
+				} 
+
+			}
+		}
+
+	return -1;
 }
 
 void Grid::makeKing(int x, int y)
@@ -130,4 +173,10 @@ void Grid::pieceTaken(int x, int y)
 {
 	board[x][y].color = NONE;
 	board[x][y].type = none;
+}
+
+void Grid::pieceAdded(PieceColor col, PieceType typ, int x, int y)
+{
+	board[x][y].color = col;
+	board[x][y].type = typ;
 }
