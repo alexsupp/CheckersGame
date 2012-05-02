@@ -27,7 +27,7 @@ int convertLetter(char a)
 int convertNumber(char a)
 {
 	int x;
-	x=a-49;
+	x=a-48;
 	if(x<0 || x>7) return -1;
 	return x;
 }
@@ -71,6 +71,8 @@ int main()
 		else
 			invalid = false;
 
+		cout<<endl<<"BEFORE !INVALID, invalid="<<invalid<<endl;
+		cout<<"ALSO MOVE FROM " << fromPos[0] << "," << fromPos[1] << " to " << toPos[0] << "," << toPos[1] << endl;
 		if(!invalid)
 		{
 			switch(turn)
