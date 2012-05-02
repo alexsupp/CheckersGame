@@ -52,7 +52,8 @@ int main()
 	while(!gameOver)
 	{
 		std::cout << gridBoard << endl;
-
+		if(invalid)
+			std::cout << "Invalid move, please try again" <<endl;
 		std::cout << "Enter move: ";
 		std::cin >> from >> to;
 
@@ -63,23 +64,26 @@ int main()
 
 		if(fromPos[0] == -1 || fromPos[1] == -1 || toPos[0] == -1 || fromPos[1] == -1)
 			invalid = true;
+		else
+			invalid = false;
+
 		if(!invalid)
 		{
 			switch(turn)
 			{
 				case blackTurn:
 					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != BLACK))
-					//	|| (gridBoard.move(fromPos, toPos) != -1))
+						|| (gridBoard.move(fromPos, toPos) == -1))
 					{
-							invalid = true;
-							break;
+						invalid = true;
+						break;
 					}
 					turn = redTurn;
 					break;
 
 				case redTurn:
 					if((gridBoard.getPosition(fromPos[0],fromPos[1]).color != RED))
-					//	|| (gridBoard.move(fromPos, toPos) != -1))
+						|| (gridBoard.move(fromPos, toPos) == -1))
 					{
 						invalid = true;
 						break;
