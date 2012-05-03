@@ -121,7 +121,7 @@ int Grid::move(int from[2], int to[2])
 						pieceAdded(tempSquare.color, tempSquare.type, X, Y);
 						if(Y==7)
 							makeKing(X,Y);	
-						return 0;
+						return 1;
 					}
 				}	
 				else if(abs(Y-y)==1)
@@ -146,7 +146,7 @@ int Grid::move(int from[2], int to[2])
 						if(Y==0)
 							makeKing(X,Y);	
 
-						return 0;
+						return 1;
 					}
 				}	
 				else if(abs(Y-y)==1)

@@ -88,7 +88,7 @@ int main()
 		cout<<"ALSO MOVE FROM " << fromPos[0] << "," << fromPos[1] << " to " << toPos[0] << "," << toPos[1] << endl;
 		if(!invalid)
 		{
-			moveResult = gridBoard.move(fromPos, toPos) == -1);
+			moveResult = gridBoard.move(fromPos, toPos);
 			switch(turn)
 			{
 				case blackTurn:
@@ -113,7 +113,7 @@ int main()
 						doublejump = false;
 						blackPieces--;
 
-						if(gridBoard.getPosition(toPos[0],toPos[1]).type == KING)
+						if(gridBoard.getPosition(toPos[0],toPos[1]).type == king)
 						{
 							if(gridBoard.getPosition(toPos[0]-1,toPos[1]+1).color == BLACK)
 							{
