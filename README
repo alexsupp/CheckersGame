@@ -1,0 +1,58 @@
+		            Checkers
+
+//////////////////////////// Authors ////////////////////////////////////
+// Jacob Duell
+// Alex Supplee
+//-------------------------------------------------------------------------
+
+//////////////////////////// Object ///////////////////////////////////// 
+// Checkers is a two-player game, wherein both players take turns moving their checkers to capture the other player's checkers.
+//-------------------------------------------------------------------------
+
+/////////////////////// Playing the game ////////////////////////////////
+// A move consists of placing one checker on a square adjacent to and diagonal from the checker. 
+// Checkers may only move in one direction until it becomes a king.
+// 	
+// If a square diagonally in front of a man is occupied by an opponent's piece, and if the square beyond that piece in the same direction is empty,
+// the man may 'jump' over the opponent's piece and land on the empty square. The opponent's piece is captured and removed from the board. 
+// 
+// If, after making a capture, a piece is in a position to make another capture (either along the same diagonal or a different one) 
+// it must do so, all as part of the same turn.
+// 
+// When a single piece reaches the last rank of the board by reason of a move, or as the completion of a 'jump', it becomes a king;
+// A King can move in any direction and 'jump' in any direction one or more pieces, as the limits of the board permit. 
+// The King can only jump diagonally over one adjacent piece at a time, in any of the four diagonal directions.
+// Multiple jumps apply to kings as well. 
+//-------------------------------------------------------------------------
+
+/////////////////////// Implementation //////////////////////////////////
+// The board is represented by a rudimentary ASCII interface.Red pieces are represented by "o" for regular checkers and "0" for red Kings.
+// Black pieces are represented by "x" for regular checkers and "*" for red Kings.
+// The table is checkered, and pieces may only move on the blank spaces.
+//
+//   A B C D E F G H
+// 0 .   .   .   .
+// 1   .   .   .   .
+// 2 .   .   .   .
+// 3   .   .   .   .
+// 4 .   .   .   .
+// 5   .   .   .   .
+// 6 .   .   .   .
+// 7   .   .   .   .
+// 8 .   .   .   .
+// 
+// Players make their moves by typing:
+// 	 the Row and Column of the piece they would like to move
+//	 and the Row and Column of its destination.
+// i.e.
+//	Move: A5 B6
+//
+// When a double jump is available, the player must make a second jump over the appropriate piece.
+//-------------------------------------------------------------------------
+
+//////////////// Comments on the workings of our code ///////////////////
+// Although the display is rudimentary, the game is very scalable and it would be easy to implement a more complex and sophisticated GUI.
+// Because all of the control is separated from the display, the display would merely need to look up the board state to draw it.
+// Additionally, using a clickable GUI grid would enable a user to click on a checker and then an appropriate move location, this would
+// easily translate into the commands used to direct piece movement presently.
+//-------------------------------------------------------------------------
