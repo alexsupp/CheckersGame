@@ -186,7 +186,7 @@ int main()
 			}//end turn switch
 		}//end invalid check
 		if(blackPieces == 0 || redPieces == 0)
-			gameOver == true;
+			gameOver = true;
 	}//end while
 
 	if(blackPieces == 0)
