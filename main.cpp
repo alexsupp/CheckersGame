@@ -7,14 +7,14 @@
 // Red is on top Black is on bottom
 void instructions()
 {
-	cout<<"/tCheckers/n"<<
-	"Each player takes turns moving their pieces diagonally/n"<<
-	"Pieces may only move forward until they reach the opposite side/n"<<
-	"If a piece reaches the opposite side it becomes a KING and can/n"<<
-	"move in any direction. State your moves with the letter column first/n"<<
-	"then the row number. i.e. Move: A5 A6"<<
-	"Jumps are made by specifying a move of two diagonal spaces over an opposing piece"<<
-	"You win the game when you have jumped all of your opponents pieces"<<endl;
+	cout<<"\tCheckers\n"<<
+	"Each player takes turns moving their pieces diagonally\n"<<
+	"Pieces may only move forward until they reach the opposite side\n"<<
+	"If a piece reaches the opposite side it becomes a KING and can\n"<<
+	"move in any direction. State your moves with the letter column first\n"<<
+	"then the row number. i.e. Move: A5 B6\n"<<
+	"Jumps are made by specifying a move of two diagonal spaces over an opposing piece\n"<<
+	"You win the game when you have jumped all of your opponents pieces\n\n"<<endl;
 }
 
 int convertLetter(char a)
@@ -51,23 +51,34 @@ int main()
 	char from[2], to[2];
 	int fromPos[2], toPos[2];
 
+
+	///////////////////////////////////////////////////////////////////
+	// Main Entry Point
+	////////////////////////////////////////////////////////////////////
+
 	instructions();
 
 	while(!gameOver)
 	{
 		std::cout << gridBoard << endl;
-		if(invalid)
+
+		if(invalid){
 			std::cout << "Invalid move, please try again" <<endl;
-		if(doublejump)
-		{
+		}
+
+		if(doublejump){
 			std::cout << "You must double jump from " << fromPos[0] << fromPos[1] << " ";
 		}
-		else
+		else{
 			std::cout << "Enter move ";
-		if(turn==blackTurn)
+		}
+
+		if(turn == blackTurn)
 			cout<<"Black: ";
 		else
 			cout<<"Red: ";
+
+		//USER MOVE INPUT
 		std::cin >> from >> to;
 
 		if(!doublejump)
@@ -84,15 +95,19 @@ int main()
 		else
 			invalid = false;
 
-		cout<<endl<<"BEFORE !INVALID, invalid="<<invalid<<endl;
-		cout<<"ALSO MOVE FROM " << fromPos[0] << "," << fromPos[1] << " to " << toPos[0] << "," << toPos[1] << endl;
+	cout<<endl<<"BEFORE !INVALID, invalid="<<invalid<<endl;
+	cout<<"ALSO MOVE FROM " << fromPos[0] << "," << fromPos[1] << " to " << toPos[0] << "," << toPos[1] << endl;
+
+		//MOVE THE PIECES
 		if(!invalid)
 		{
 			moveResult = gridBoard.move(fromPos, toPos);
+			doublejump = false;
 			switch(turn)
 			{
 				case blackTurn:
-					if(gridBoard.getPosition(fromPos[0],fromPos[1]).color != BLACK || moveResult == -1)
+					if(gridBoard.getPosition(fromPos[0],fromPos[1]).color != BLACK ||
+					   moveResult == -1)
 					{
 						invalid = true;
 						break;
@@ -103,41 +118,36 @@ int main()
 					break;
 
 				case redTurn:
-					if(gridBoard.getPosition(fromPos[0],fromPos[1]).color != RED || moveResult == -1)
+					if(gridBoard.getPosition(fromPos[0],fromPos[1]).color != RED ||
+					   moveResult == -1)
 					{
 						invalid = true;
 						break;
 					}
-					if(moveResult == 1)
+					if(moveResult == 1) //JUMP
 					{
-						doublejump = false;
 						blackPieces--;
-
-						if(gridBoard.getPosition(toPos[0],toPos[1]).type == king)
+			std::cout << "BLACK PIECES" << blackPieces<<endl;
+			std::cout << "RED PIECES"  << redPieces<<endl;
+						for(int i=-1; i<2; i+=2)
 						{
-							if(gridBoard.getPosition(toPos[0]-1,toPos[1]+1).color == BLACK)
+							if(gridBoard.getPosition(toPos[0],toPos[1]).type == king)
 							{
-								if(gridBoard.getPosition(toPos[0]-2,toPos[1]-2).color == NONE)
-									doublejump = true;
+								if(gridBoard.getPosition(toPos[0]+i,toPos[1]+1).color == BLACK &&
+								   gridBoard.getPosition(toPos[0]+(i*2), toPos[1]+2).color == NONE)
+								{
+									doublejump == true;
+								}
 							}
-							if(gridBoard.getPosition(toPos[0]+1,toPos[1]+1).color == BLACK)
+							if(gridBoard.getPosition(toPos[0]+i,toPos[1]-1).color == BLACK &&
+							   gridBoard.getPosition(toPos[0]+(i*2), toPos[1]-2).color == NONE)
 							{
-								if(gridBoard.getPosition(toPos[0]-2,toPos[1]-2).color == NONE)
-									doublejump = true;
+								doublejump == true;
 							}
 						}
-						if(gridBoard.getPosition(toPos[0]-1,toPos[1]-1).color == BLACK)
-						{
-							if(gridBoard.getPosition(toPos[0]-2,toPos[1]-2).color == NONE)
-								doublejump = true;
-						}
-						if(gridBoard.getPosition(toPos[0]+1,toPos[1]-1).color == BLACK)
-						{
-							if(gridBoard.getPosition(toPos[0]+2,toPos[1]-2).color == NONE)
-								doublejump = true;
-						}
-					}
-					turn = blackTurn;
+					}//End JUMP
+					if(!doublejump)
+						turn = blackTurn;
 					break;
 			}//end turn switch
 		}//end invalid check
